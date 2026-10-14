@@ -131,6 +131,24 @@ li + li { margin-top: 4px; }
 .features h3 { margin: 0 0 4px; }
 .features p { margin: 0; font-size: 0.97rem; }
 
+/* Phrasebook: tap to hear PiiiP */
+.phrases { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 16px; }
+.phrase {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  padding: 14px 16px; border: 0; border-radius: var(--radius-tile);
+  background: var(--paper); color: var(--ink); text-align: left; cursor: pointer;
+  font: inherit; transition: transform 150ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+.phrase span { font: 1.45rem/1.1 var(--font-hand); }
+.phrase small { font: 0.78rem/1.3 var(--font-mono); color: var(--soft); }
+.phrase:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.phrase:active { transform: scale(0.97); }
+.phrase:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.phrase.playing { background: var(--ink); }
+.phrase.playing span, .phrase.playing small { color: var(--card); }
+.phrase.alert span { color: #D2002A; }
+.phrase.alert.playing { background: #D2002A; }
+
 /* FAQ */
 details { border-top: 1px solid var(--rule); padding: 14px 0; }
 details:last-of-type { border-bottom: 1px solid var(--rule); }

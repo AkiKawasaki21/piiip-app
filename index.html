@@ -46,7 +46,21 @@
       <li><h3>Njegova kafa</h3><p>Produženi, makijato, domaća… sa mlijekom, šećerom i čašom vode sa strane.</p></li>
       <li><h3>Šta da kažeš</h3><p>„Đe si, Marko! Produženi, kao i uvijek?“</p></li>
       <li><h3>O čemu da pričate</h3><p>Iz bilješki ekipe: sinoćna utakmica, ime psa, rođendan.</p></li>
+      <li><h3>„Đe si, Marko?“</h3><p>Kad stalni gost ne svrati duže nego inače, PiiiP te podsjeti. I za rođendane, dan ranije.</p></li>
     </ul>
+  </section>
+
+  <section class="card" aria-labelledby="hear-title">
+    <h2 id="hear-title" style="margin-top:0">Poslušaj PiiiP-a</h2>
+    <p class="soft">PiiiP je ptić, pa pijuče, ali po podgorički: jedan pijuk za svaki slog, na melodiju rečenice.</p>
+    <div class="phrases">
+      <button class="phrase" type="button" data-sound="dje-si"><span>Đe si?</span><small>Stalni gost dugo ne svrati</small></button>
+      <button class="phrase" type="button" data-sound="rodjendan"><span>Srećan rođendan!</span><small>Rođendan stalnog gosta</small></button>
+      <button class="phrase" type="button" data-sound="ajmo"><span>Ajmo!</span><small>Prvi gost u smjeni</small></button>
+      <button class="phrase" type="button" data-sound="svaka-cast"><span>Svaka čast!</span><small>Kraj smjene</small></button>
+      <button class="phrase" type="button" data-sound="piiip"><span>Piiip!</span><small>Upališ obavještenja</small></button>
+      <button class="phrase alert" type="button" data-sound="kuku"><span>Kuku!</span><small>Teška alergija</small></button>
+    </div>
   </section>
 
   <section class="card" aria-labelledby="data-title">
@@ -70,5 +84,23 @@
     <span><a href="support/">Podrška</a> · <a href="privacy/">Privatnost</a></span>
   </div>
 </footer>
+<script>
+  // Tap a phrase to hear it. One sound at a time; a second tap restarts it.
+  (function () {
+    var current = null;
+    document.querySelectorAll('[data-sound]').forEach(function (button) {
+      var audio = new Audio('assets/sounds/' + button.dataset.sound + '.m4a');
+      audio.preload = 'none';
+      audio.addEventListener('ended', function () { button.classList.remove('playing'); });
+      button.addEventListener('click', function () {
+        if (current && current !== audio) current.pause();
+        document.querySelectorAll('.phrase.playing').forEach(function (b) { b.classList.remove('playing'); });
+        current = audio;
+        audio.currentTime = 0;
+        audio.play().then(function () { button.classList.add('playing'); }).catch(function () {});
+      });
+    });
+  })();
+</script>
 </body>
 </html>
